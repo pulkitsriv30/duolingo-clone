@@ -113,97 +113,201 @@ html.light .border-gray-200 { border-color: #e5e7eb !important; }
 /* ============================================================ */
 /* DUO OWL MASCOT ANIMATIONS (Breathing, Floating, Waving)       */
 /* ============================================================ */
-@keyframes duo-float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+/* ============================================================ */
+/* DUO OWL MASCOT ANIMATIONS (Look Left, Look Right, 360° Twirl)*/
+/* ============================================================ */
+
+/* 1. Whole Character Sequence (6.5s Cycle: Idle -> Look Left -> Look Right -> 360° Jump Twirl) */
+@keyframes duo-actor-cycle {
+  0%, 14% {
+    /* Idle slight breathing */
+    transform: translateY(0px) rotateY(0deg) scale(1);
   }
-  50% {
-    transform: translateY(-8px) rotate(1deg);
+  18%, 32% {
+    /* Holds body steady while head looks left */
+    transform: translateY(-1px) rotateY(0deg) scale(1);
+  }
+  36%, 44% {
+    /* Center */
+    transform: translateY(0px) rotateY(0deg) scale(1);
+  }
+  48%, 62% {
+    /* Holds body steady while head looks right */
+    transform: translateY(-1px) rotateY(0deg) scale(1);
+  }
+  65%, 68% {
+    /* Anticipation crouch before jumping */
+    transform: translateY(3px) scaleY(0.94) scaleX(1.04) rotateY(0deg);
+  }
+  /* THE TWIRL (Full 360° Pirouette in mid-air!) */
+  71% {
+    transform: translateY(-12px) scale(1.05) rotateY(90deg);
+  }
+  75% {
+    transform: translateY(-26px) scale(1.1) rotateY(180deg);
+  }
+  79% {
+    transform: translateY(-26px) scale(1.1) rotateY(270deg);
+  }
+  83% {
+    transform: translateY(-10px) scale(1.05) rotateY(360deg);
+  }
+  86% {
+    /* Landing squash */
+    transform: translateY(3px) scaleY(0.93) scaleX(1.05) rotateY(360deg);
+  }
+  90%, 100% {
+    /* Recovers to original standing stance */
+    transform: translateY(0px) rotateY(0deg) scale(1);
   }
 }
-.duo-float {
-  animation: duo-float 3s ease-in-out infinite;
+.duo-actor {
+  animation: duo-actor-cycle 6.5s ease-in-out infinite;
+  transform-origin: center bottom;
 }
 
-@keyframes duo-shadow {
-  0%, 100% {
+/* 2. Interactive Instant Click Twirl */
+@keyframes manual-twirl {
+  0% { transform: translateY(0) rotateY(0deg); }
+  20% { transform: translateY(2px) scaleY(0.95); }
+  50% { transform: translateY(-28px) scale(1.12) rotateY(180deg); }
+  80% { transform: translateY(-6px) scale(1.05) rotateY(360deg); }
+  90% { transform: translateY(3px) scaleY(0.92); }
+  100% { transform: translateY(0) rotateY(360deg); }
+}
+.animate-manual-twirl {
+  animation: manual-twirl 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
+/* 3. Dynamic Ground Shadow matching the Jump Twirl */
+@keyframes duo-shadow-cycle {
+  0%, 14% {
     transform: translateX(-50%) scaleX(1);
-    opacity: 0.25;
+    opacity: 0.3;
   }
-  50% {
-    transform: translateX(-50%) scaleX(0.85);
-    opacity: 0.15;
+  65%, 68% {
+    transform: translateX(-50%) scaleX(1.1);
+    opacity: 0.38;
+  }
+  73%, 81% {
+    /* In mid-air: shadow shrinks and fades */
+    transform: translateX(-50%) scaleX(0.45);
+    opacity: 0.12;
+  }
+  86% {
+    /* Landing impact: shadow sharpens */
+    transform: translateX(-50%) scaleX(1.15);
+    opacity: 0.4;
+  }
+  92%, 100% {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 0.3;
   }
 }
 .duo-shadow {
-  animation: duo-shadow 3s ease-in-out infinite;
+  animation: duo-shadow-cycle 6.5s ease-in-out infinite;
 }
 
-@keyframes duo-left-wing {
-  0%, 100% {
+/* 4. Head Group (Rotates Left, Centers, Rotates Right) */
+@keyframes duo-head-turn {
+  0%, 14% {
+    transform: rotate(0deg) translateX(0px);
+  }
+  18%, 32% {
+    /* Head turns to the left */
+    transform: rotate(-14deg) translateX(-4px) translateY(1px);
+  }
+  36%, 44% {
+    /* Returns to center */
+    transform: rotate(0deg) translateX(0px);
+  }
+  48%, 62% {
+    /* Head turns to the right (looking toward path & user) */
+    transform: rotate(14deg) translateX(4px) translateY(1px);
+  }
+  64%, 100% {
+    /* Focused forward during twirl and landing */
+    transform: rotate(0deg) translateX(0px);
+  }
+}
+.duo-head {
+  transform-origin: 50px 60px;
+  animation: duo-head-turn 6.5s ease-in-out infinite;
+}
+
+/* 5. Pupils Gaze Tracking & Blinking */
+@keyframes duo-pupils-cycle {
+  0%, 14% {
+    transform: scaleY(1) translateX(0px);
+  }
+  18%, 32% {
+    /* Pupils glance left */
+    transform: scaleY(1) translateX(-3.5px);
+  }
+  38% {
+    /* Blink */
+    transform: scaleY(0.1) translateX(0px);
+  }
+  42%, 46% {
+    transform: scaleY(1) translateX(0px);
+  }
+  48%, 62% {
+    /* Pupils glance right */
+    transform: scaleY(1) translateX(3.5px);
+  }
+  66% {
+    /* Quick curious blink */
+    transform: scaleY(0.1) translateX(0px);
+  }
+  70%, 88% {
+    /* Wide excited eyes during twirl */
+    transform: scaleY(1.08) translateX(0px);
+  }
+  92% {
+    /* Blink on landing */
+    transform: scaleY(0.1) translateX(0px);
+  }
+  96%, 100% {
+    transform: scaleY(1) translateX(0px);
+  }
+}
+.duo-pupils {
+  transform-origin: 50px 47px;
+  animation: duo-pupils-cycle 6.5s ease-in-out infinite;
+}
+
+/* 6. Wings Flapping Excitedly During Twirl */
+@keyframes duo-left-wing-flap {
+  0%, 65% {
     transform: rotate(0deg);
   }
-  30%, 40% {
-    transform: rotate(-18deg) translateY(-2px);
+  72%, 84% {
+    /* Flap wing rapidly during twirl */
+    transform: rotate(-24deg) translateY(-3px);
   }
-  70% {
+  88%, 100% {
     transform: rotate(0deg);
   }
 }
 .duo-left-wing {
   transform-origin: 22px 50px;
-  animation: duo-left-wing 3.5s ease-in-out infinite;
+  animation: duo-left-wing-flap 6.5s ease-in-out infinite;
 }
 
-@keyframes duo-head-turn {
-  0%, 100% {
-    transform: rotate(0deg) translateX(0px);
+@keyframes duo-right-wing-flap {
+  0%, 65% {
+    transform: rotate(0deg);
   }
-  15%, 35% {
-    /* Head turns left */
-    transform: rotate(-10deg) translateX(-4px) translateY(1px);
+  72%, 84% {
+    transform: rotate(24deg) translateY(-3px);
   }
-  45%, 55% {
-    /* Center */
-    transform: rotate(0deg) translateX(0px);
-  }
-  65%, 85% {
-    /* Head turns right toward learner */
-    transform: rotate(10deg) translateX(4px) translateY(1px);
+  88%, 100% {
+    transform: rotate(0deg);
   }
 }
-.duo-head {
-  transform-origin: 50px 60px;
-  animation: duo-head-turn 4.5s ease-in-out infinite;
-}
-
-@keyframes duo-pupils {
-  0%, 100% {
-    transform: scaleY(1) translateX(0px);
-  }
-  15%, 35% {
-    /* Looking left */
-    transform: scaleY(1) translateX(-3px);
-  }
-  44% {
-    /* Blink */
-    transform: scaleY(0.1) translateX(0px);
-  }
-  48%, 55% {
-    transform: scaleY(1) translateX(0px);
-  }
-  65%, 85% {
-    /* Looking right */
-    transform: scaleY(1) translateX(3px);
-  }
-  92% {
-    /* Quick blink */
-    transform: scaleY(0.1) translateX(0px);
-  }
-}
-.duo-pupils {
-  transform-origin: 50px 47px;
-  animation: duo-pupils 4.5s ease-in-out infinite;
+.duo-right-wing {
+  transform-origin: 78px 50px;
+  animation: duo-right-wing-flap 6.5s ease-in-out infinite;
 }
 
 /* Start tooltip bounce */
