@@ -10,8 +10,8 @@ interface DuoMascotProps {
 export default function DuoMascot({ className = 'w-24 h-24' }: DuoMascotProps) {
   return (
     <div className={clsx('relative inline-block duo-float', className)}>
-      {/* Shadow platform beneath Duo */}
-      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-16 h-3 bg-black/25 rounded-full filter blur-[1px] duo-shadow" />
+      {/* Ground shadow platform beneath Duo */}
+      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-16 h-3.5 bg-black/30 rounded-full filter blur-[1px] duo-shadow" />
 
       {/* Duo SVG Mascot */}
       <svg
@@ -45,34 +45,37 @@ export default function DuoMascot({ className = 'w-24 h-24' }: DuoMascotProps) {
           <ellipse cx="81" cy="55" rx="7" ry="12" transform="rotate(-15 81 55)" fill="#58CC02" />
         </g>
 
-        {/* Big White Eyes */}
-        <ellipse cx="36" cy="46" rx="13" ry="15" fill="#FFFFFF" />
-        <ellipse cx="64" cy="46" rx="13" ry="15" fill="#FFFFFF" />
+        {/* HEAD GROUP (Head tilts left and right playfully, as requested!) */}
+        <g className="duo-head">
+          {/* Cute Feathers on Head (Tufts) */}
+          <path d="M42 24C45 20 50 20 52 24" stroke="#46A302" strokeWidth="3" strokeLinecap="round" />
+          <path d="M48 22C52 17 58 18 60 22" stroke="#58CC02" strokeWidth="3" strokeLinecap="round" />
 
-        {/* Eye Outlines */}
-        <ellipse cx="36" cy="46" rx="13" ry="15" stroke="#46A302" strokeWidth="2" />
-        <ellipse cx="64" cy="46" rx="13" ry="15" stroke="#46A302" strokeWidth="2" />
+          {/* Big White Eyes */}
+          <ellipse cx="36" cy="46" rx="13" ry="15" fill="#FFFFFF" />
+          <ellipse cx="64" cy="46" rx="13" ry="15" fill="#FFFFFF" />
 
-        {/* Pupils (Animated Blinking) */}
-        <g className="duo-pupils">
-          {/* Left Pupil (Dark cyan/blue like in Duolingo) */}
-          <circle cx="39" cy="47" r="7.5" fill="#1CB0F6" />
-          <circle cx="39" cy="47" r="4.5" fill="#0A3048" />
-          <circle cx="37" cy="44.5" r="2.2" fill="#FFFFFF" />
+          {/* Eye Outlines */}
+          <ellipse cx="36" cy="46" rx="13" ry="15" stroke="#46A302" strokeWidth="2" />
+          <ellipse cx="64" cy="46" rx="13" ry="15" stroke="#46A302" strokeWidth="2" />
 
-          {/* Right Pupil */}
-          <circle cx="61" cy="47" r="7.5" fill="#1CB0F6" />
-          <circle cx="61" cy="47" r="4.5" fill="#0A3048" />
-          <circle cx="59" cy="44.5" r="2.2" fill="#FFFFFF" />
+          {/* Pupils (Animated Blinking + Shifting Gaze Left & Right) */}
+          <g className="duo-pupils">
+            {/* Left Pupil */}
+            <circle cx="39" cy="47" r="7.5" fill="#1CB0F6" />
+            <circle cx="39" cy="47" r="4.5" fill="#0A3048" />
+            <circle cx="37" cy="44.5" r="2.2" fill="#FFFFFF" />
+
+            {/* Right Pupil */}
+            <circle cx="61" cy="47" r="7.5" fill="#1CB0F6" />
+            <circle cx="61" cy="47" r="4.5" fill="#0A3048" />
+            <circle cx="59" cy="44.5" r="2.2" fill="#FFFFFF" />
+          </g>
+
+          {/* Orange Beak */}
+          <polygon points="50,62 42,52 58,52" fill="#E05B00" />
+          <polygon points="50,61 43,52.5 57,52.5" fill="#FF9600" />
         </g>
-
-        {/* Orange Beak */}
-        <polygon points="50,62 42,52 58,52" fill="#E05B00" />
-        <polygon points="50,61 43,52.5 57,52.5" fill="#FF9600" />
-
-        {/* Cute Feathers on Head (Tufts) */}
-        <path d="M42 24C45 20 50 20 52 24" stroke="#46A302" strokeWidth="3" strokeLinecap="round" />
-        <path d="M48 22C52 17 58 18 60 22" stroke="#58CC02" strokeWidth="3" strokeLinecap="round" />
       </svg>
     </div>
   );

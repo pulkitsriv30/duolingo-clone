@@ -155,17 +155,55 @@ html.light .border-gray-200 { border-color: #e5e7eb !important; }
   animation: duo-left-wing 3.5s ease-in-out infinite;
 }
 
-@keyframes duo-pupils {
-  0%, 90%, 100% {
-    transform: scaleY(1);
+@keyframes duo-head-turn {
+  0%, 100% {
+    transform: rotate(0deg) translateX(0px);
   }
-  95% {
-    transform: scaleY(0.1);
+  15%, 35% {
+    /* Head turns left */
+    transform: rotate(-10deg) translateX(-4px) translateY(1px);
+  }
+  45%, 55% {
+    /* Center */
+    transform: rotate(0deg) translateX(0px);
+  }
+  65%, 85% {
+    /* Head turns right toward learner */
+    transform: rotate(10deg) translateX(4px) translateY(1px);
+  }
+}
+.duo-head {
+  transform-origin: 50px 60px;
+  animation: duo-head-turn 4.5s ease-in-out infinite;
+}
+
+@keyframes duo-pupils {
+  0%, 100% {
+    transform: scaleY(1) translateX(0px);
+  }
+  15%, 35% {
+    /* Looking left */
+    transform: scaleY(1) translateX(-3px);
+  }
+  44% {
+    /* Blink */
+    transform: scaleY(0.1) translateX(0px);
+  }
+  48%, 55% {
+    transform: scaleY(1) translateX(0px);
+  }
+  65%, 85% {
+    /* Looking right */
+    transform: scaleY(1) translateX(3px);
+  }
+  92% {
+    /* Quick blink */
+    transform: scaleY(0.1) translateX(0px);
   }
 }
 .duo-pupils {
   transform-origin: 50px 47px;
-  animation: duo-pupils 4s ease-in-out infinite;
+  animation: duo-pupils 4.5s ease-in-out infinite;
 }
 
 /* Start tooltip bounce */
