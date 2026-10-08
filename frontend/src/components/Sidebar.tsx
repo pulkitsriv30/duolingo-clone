@@ -4,71 +4,66 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   Home,
+  Shield,
+  Zap,
+  Store,
   User,
-  Settings,
-  Trophy,
-  Timer,
-  Crown,
+  MoreHorizontal,
 } from 'lucide-react';
 import clsx from 'clsx';
 
 const navItems = [
-  { href: '/',                      label: 'Learn',            icon: Home },
-  { href: '/lesson/1?mode=legendary', label: 'Timed Practice', icon: Timer, highlight: true },
-  { href: '/leaderboard',           label: 'Leaderboard',      icon: Trophy },
-  { href: '/profile',               label: 'Profile & Badges', icon: User },
-  { href: '/settings',              label: 'Settings',         icon: Settings },
+  { href: '/',             label: 'LEARN',        icon: Home,           color: 'text-[#58cc02]' },
+  { href: '/leaderboard',  label: 'LEADERBOARDS', icon: Shield,         color: 'text-[#ffc800]' },
+  { href: '/profile',      label: 'QUESTS',       icon: Zap,            color: 'text-[#ff9600]' },
+  { href: '/settings',     label: 'SHOP',         icon: Store,          color: 'text-[#1cb0f6]' },
+  { href: '/profile',      label: 'PROFILE',      icon: User,           color: 'text-[#ce82ff]' },
+  { href: '/settings',     label: 'MORE',         icon: MoreHorizontal, color: 'text-gray-400' },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden lg:flex flex-col w-64 xl:w-72 border-r-2 border-gray-100 dark:border-[#2b3940] bg-white dark:bg-[#182228] px-4 py-6 h-screen sticky top-0 shrink-0">
-      {/* Duolingo logo */}
-      <Link href="/" className="flex items-center gap-2.5 px-4 mb-8 group">
-        <span className="text-4xl transition-transform group-hover:scale-110">🦉</span>
-        <span className="text-[#58cc02] font-black text-2xl tracking-tight">duolingo</span>
+    <aside className="hidden lg:flex flex-col w-64 xl:w-68 border-r-2 border-gray-100 dark:border-[#2b3940] bg-white dark:bg-[#131f24] px-4 py-6 h-screen sticky top-0 shrink-0">
+      {/* Duolingo Logo */}
+      <Link href="/" className="flex items-center gap-2 px-3 mb-8 group">
+        <span className="text-[#58cc02] font-black text-3xl tracking-tight">duolingo</span>
       </Link>
 
-      {/* Navigation links */}
-      <nav className="flex flex-col gap-1.5 flex-1">
-        {navItems.map(({ href, label, icon: Icon, highlight }) => {
-          const active = pathname === href;
+      {/* Navigation links matching screenshot */}
+      <nav className="flex flex-col gap-2 flex-1">
+        {navItems.map(({ href, label, icon: Icon, color }) => {
+          const active =
+            label === 'LEARN'
+              ? pathname === '/' || pathname.startsWith('/lesson')
+              : label === 'LEADERBOARDS'
+              ? pathname === '/leaderboard'
+              : label === 'PROFILE'
+              ? pathname === '/profile'
+              : label === 'SHOP'
+              ? pathname === '/settings'
+              : false;
+
           return (
             <Link
-              key={href}
+              key={label}
               href={href}
               className={clsx(
-                'flex items-center gap-4 px-4 py-3 rounded-2xl uppercase font-extrabold text-xs tracking-wider transition-all',
+                'flex items-center gap-4 px-4 py-3 rounded-2xl font-black text-xs tracking-wider transition-all uppercase',
                 active
-                  ? 'bg-[#ddf4ff] dark:bg-[#103040] text-[#1cb0f6] border-2 border-[#84d8ff] dark:border-[#105070]'
-                  : highlight
-                  ? 'text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-950/30 border-2 border-transparent'
+                  ? 'bg-[#ddf4ff] dark:bg-[#103040] text-[#1cb0f6] border-2 border-[#84d8ff] dark:border-[#38bdf8] shadow-sm'
                   : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#202f36] border-2 border-transparent'
               )}
             >
-              <Icon className="w-5 h-5 shrink-0" />
-              <span>{label}</span>
-              {highlight && (
-                <span className="ml-auto text-[10px] bg-[#ce82ff] text-white px-1.5 py-0.5 rounded-full font-bold">
-                  Bonus
-                </span>
-              )}
+              <div className="w-7 h-7 flex items-center justify-center">
+                <Icon className={clsx('w-6 h-6', active ? 'text-[#1cb0f6]' : color)} strokeWidth={2.5} />
+              </div>
+              <span className="font-extrabold text-xs tracking-wider">{label}</span>
             </Link>
           );
         })}
       </nav>
-
-      {/* Footer hint */}
-      <div className="px-4 py-3 bg-gray-50 dark:bg-[#202f36] rounded-2xl border border-gray-100 dark:border-[#2b3940]">
-        <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">
-          Fullstack SDE Project
-        </p>
-        <p className="text-xs font-extrabold text-gray-600 dark:text-gray-300">
-          FastAPI + Next.js + SQLite
-        </p>
-      </div>
     </aside>
   );
 }

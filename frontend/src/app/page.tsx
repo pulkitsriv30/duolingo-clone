@@ -4,10 +4,11 @@ import { fetchUnits, fetchUser } from '@/lib/api';
 import Link from 'next/link';
 import TopBar from '@/components/TopBar';
 import TestSimulateWidget from '@/components/TestSimulateWidget';
+import DuoMascot from '@/components/illustrations/DuoMascot';
 import clsx from 'clsx';
-import { Lock, Crown, Timer, Sparkles } from 'lucide-react';
+import { Lock, Crown, Star, BookOpen, Shield, Zap, Gift } from 'lucide-react';
 
-const PATH_OFFSETS = [-50, 0, 50, 0];
+const PATH_OFFSETS = [-45, 0, 45, 0];
 
 export default async function HomePage() {
   let units: any[] = [];
@@ -20,50 +21,29 @@ export default async function HomePage() {
     units = [
       {
         id: 1,
-        title: "Unit 1",
-        description: "Basics 1",
-        color: "bg-emerald-500",
+        title: "Section 1, Unit 1",
+        description: "Order at a café",
+        color: "bg-[#58cc02]",
         language: "Spanish",
         skills: [
-          { id: 1, title: "Intro", icon: "⭐", color: "bg-yellow-400" },
-          { id: 2, title: "Greetings", icon: "👋", color: "bg-orange-400" },
-          { id: 3, title: "Animals", icon: "🐶", color: "bg-pink-400" },
-        ],
-      },
-      {
-        id: 2,
-        title: "Unit 2",
-        description: "Phrases",
-        color: "bg-blue-500",
-        language: "Spanish",
-        skills: [
-          { id: 4, title: "Food", icon: "🍎", color: "bg-red-400" },
-          { id: 5, title: "Numbers", icon: "🔢", color: "bg-blue-400" },
-          { id: 6, title: "Colors", icon: "🎨", color: "bg-indigo-400" },
-        ],
-      },
-      {
-        id: 3,
-        title: "Unit 3",
-        description: "Travel",
-        color: "bg-purple-500",
-        language: "Spanish",
-        skills: [
-          { id: 7, title: "Travel", icon: "✈️", color: "bg-teal-400" },
-          { id: 8, title: "Restaurant", icon: "🍽️", color: "bg-amber-400" },
+          { id: 1, title: "Intro", icon: "⭐", color: "bg-[#58cc02]" },
+          { id: 2, title: "Greetings", icon: "⭐", color: "bg-[#202f36]" },
+          { id: 3, title: "Chest", icon: "🎁", isChest: true, color: "bg-[#202f36]" },
+          { id: 4, title: "Animals", icon: "⭐", color: "bg-[#202f36]" },
+          { id: 5, title: "Food", icon: "⭐", color: "bg-[#202f36]" },
         ],
       },
     ];
     user = {
       username: 'learner123',
       display_name: 'Alex',
-      streak: 5,
-      xp: 320,
-      hearts: 4,
-      gems: 450,
-      daily_xp: 30,
-      daily_goal: 50,
-      completed_skills: [1, 2],
+      streak: 1,
+      xp: 10,
+      hearts: 5,
+      gems: 505,
+      daily_xp: 10,
+      daily_goal: 10,
+      completed_skills: [],
     };
   }
 
@@ -78,190 +58,253 @@ export default async function HomePage() {
     <>
       <TopBar user={user} />
 
-      <div className="flex max-w-[1040px] mx-auto w-full px-4 lg:px-8">
-        {/* Learning Path (center column) */}
-        <div className="flex-1 py-8 pb-24">
-          {(units as any[]).map((unit: any) => {
-            const skills: any[] = unit.skills;
+      <div className="flex max-w-[1080px] mx-auto w-full px-4 lg:px-8">
+        {/* Learning Path (Center Column matching Duolingo screenshot) */}
+        <div className="flex-1 py-6 pb-24 max-w-[580px] mx-auto">
+          {(units as any[]).map((unit: any, uIdx: number) => {
+            const skills: any[] = unit.skills || [];
 
             return (
-              <section key={unit.id} className="mb-16">
-                {/* Unit Header Banner */}
-                <div className={clsx(
-                  'rounded-2xl p-5 text-white font-extrabold mb-10 flex items-center justify-between shadow-sm',
-                  unit.color || 'bg-emerald-500'
-                )}>
+              <section key={unit.id} className="mb-14">
+                {/* Unit Header Banner (Matches screenshot: Green banner with Section 1 Unit 1 + GUIDEBOOK button) */}
+                <div className="rounded-2xl p-4 sm:p-5 text-white font-extrabold mb-10 flex items-center justify-between bg-[#58cc02] shadow-[0_4px_0_#46a302]">
                   <div>
-                    <p className="text-xs sm:text-sm font-bold uppercase opacity-80 tracking-wider">{unit.language}</p>
-                    <h2 className="text-lg sm:text-xl">{unit.title} — {unit.description}</h2>
+                    <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider opacity-90 mb-1">
+                      <span>&larr;</span>
+                      <span>SECTION {unit.order || uIdx + 1}, UNIT 1</span>
+                    </div>
+                    <h2 className="text-xl sm:text-2xl font-black tracking-tight">
+                      {unit.description || 'Order at a café'}
+                    </h2>
                   </div>
-                  <span className="text-3xl sm:text-4xl">📖</span>
+
+                  {/* GUIDEBOOK pill button */}
+                  <Link
+                    href={`/lesson/${skills[0]?.id || 1}`}
+                    className="flex items-center gap-2 bg-transparent hover:bg-black/10 border-2 border-white/60 text-white px-3.5 py-2 rounded-2xl font-black text-xs uppercase tracking-wider transition-all"
+                  >
+                    <BookOpen className="w-4 h-4" />
+                    <span>GUIDEBOOK</span>
+                  </Link>
                 </div>
 
-                {/* Skill Nodes — winding path */}
-                <div className="flex flex-col items-center gap-10">
+                {/* Skill Nodes Path */}
+                <div className="relative flex flex-col items-center gap-9 py-2">
+                  {/* ANIMATED DUO THE OWL MASCOT (Placed on the path beside node 2/3 just like screenshot) */}
+                  <div
+                    className="absolute right-4 sm:right-10 top-[140px] z-20 flex flex-col items-center pointer-events-none select-none"
+                    style={{ transform: 'translateX(20px)' }}
+                  >
+                    <DuoMascot className="w-24 h-24 sm:w-28 sm:h-28" />
+                  </div>
+
                   {skills.map((skill: any, idx: number) => {
                     const done = completedSet.has(skill.id);
                     const unlocked = isUnlocked(skills, idx);
+                    const isFirstActive = unlocked && !done && (idx === 0 || completedSet.has(skills[idx - 1]?.id));
                     const offset = PATH_OFFSETS[idx % PATH_OFFSETS.length];
 
                     return (
                       <div
                         key={skill.id}
-                        className="relative flex flex-col items-center"
+                        className="relative flex flex-col items-center z-10"
                         style={{ transform: `translateX(${offset}px)` }}
                       >
-                        {/* Connector line above (except first) */}
+                        {/* Connector track line above (except first) */}
                         {idx > 0 && (
-                          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-1.5 h-10 bg-gray-200 dark:bg-gray-700 rounded-full" />
+                          <div className="absolute -top-9 left-1/2 -translate-x-1/2 w-2 h-9 bg-gray-200 dark:bg-[#202f36] rounded-full" />
+                        )}
+
+                        {/* Floating "START" speech bubble for the active node */}
+                        {isFirstActive && (
+                          <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 start-bounce pointer-events-none">
+                            <div className="relative bg-white dark:bg-[#202f36] border-2 border-gray-200 dark:border-[#2b3940] text-gray-800 dark:text-white px-3.5 py-1 rounded-xl text-xs font-black uppercase tracking-wider shadow-md whitespace-nowrap">
+                              START
+                              {/* Speech bubble down arrow */}
+                              <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-white dark:bg-[#202f36] border-b-2 border-r-2 border-gray-200 dark:border-[#2b3940] rotate-45" />
+                            </div>
+                          </div>
                         )}
 
                         {unlocked ? (
                           <div className="relative group">
-                            <Link href={`/lesson/${skill.id}`} className="skill-node block">
-                              <SkillNode skill={skill} done={done} />
+                            <Link href={`/lesson/${skill.id}`} className="block">
+                              <SkillNode
+                                skill={skill}
+                                done={done}
+                                active={isFirstActive}
+                              />
                             </Link>
 
-                            {/* Legendary Challenge button for completed skills */}
+                            {/* Legendary Challenge crown button for completed skills */}
                             {done && (
                               <Link
                                 href={`/lesson/${skill.id}?mode=legendary`}
-                                className="absolute -top-2 -right-3 bg-[#ce82ff] hover:bg-[#b85eff] text-white p-1.5 rounded-full shadow-[0_2px_0_#8e26ca] transition-all hover:scale-110"
+                                className="absolute -top-2 -right-2 bg-[#ce82ff] hover:bg-[#b85eff] text-white p-1.5 rounded-full shadow-[0_2px_0_#8e26ca] transition-all hover:scale-110"
                                 title="Play Legendary Challenge (Timed, +40 XP)"
                               >
-                                <Crown className="w-4 h-4" />
+                                <Crown className="w-3.5 h-3.5" />
                               </Link>
                             )}
                           </div>
                         ) : (
-                          <div className="skill-node opacity-60 cursor-not-allowed">
+                          <div className="opacity-90 cursor-not-allowed">
                             <SkillNode skill={skill} done={done} locked />
                           </div>
                         )}
-
-                        {/* Skill title below node */}
-                        <p className="text-center text-xs font-extrabold text-gray-500 dark:text-gray-400 uppercase tracking-wide mt-2 w-28">
-                          {skill.title}
-                        </p>
                       </div>
                     );
                   })}
+
+                  {/* Treasure Chest Node at the bottom */}
+                  <div
+                    className="relative flex flex-col items-center z-10 opacity-70"
+                    style={{ transform: 'translateX(0px)' }}
+                  >
+                    <div className="w-16 h-14 bg-gray-200 dark:bg-[#202f36] border-2 border-b-4 border-gray-300 dark:border-[#2b3940] rounded-2xl flex items-center justify-center text-2xl shadow-sm">
+                      🧰
+                    </div>
+                  </div>
                 </div>
               </section>
             );
           })}
         </div>
 
-        {/* Right-side widgets (desktop only) */}
-        <aside className="hidden xl:flex flex-col w-80 py-8 pl-8 gap-5 shrink-0">
-          <ProfileWidget user={user} />
-          <LegendaryTimedWidget />
-          <DailyGoalWidget user={user} />
-          <TestSimulateWidget currentStreak={user.streak ?? 5} />
+        {/* Right-Side Column Widgets (Matches screenshot layout) */}
+        <aside className="hidden xl:flex flex-col w-84 py-6 pl-8 gap-5 shrink-0">
+          {/* Widget 1: Unlock Leaderboards! (Matches screenshot) */}
+          <div className="border-2 border-gray-200 dark:border-[#2b3940] rounded-2xl p-4 bg-white dark:bg-[#182228]">
+            <h3 className="font-black text-gray-800 dark:text-white text-base mb-3">
+              Unlock Leaderboards!
+            </h3>
+            <div className="flex items-center gap-3.5">
+              <div className="w-12 h-14 bg-gray-100 dark:bg-[#202f36] rounded-xl flex items-center justify-center text-2xl border border-gray-200 dark:border-[#2b3940] shrink-0">
+                <Shield className="w-6 h-6 text-gray-400 dark:text-gray-500" />
+              </div>
+              <p className="text-xs font-bold text-gray-500 dark:text-gray-400 leading-snug">
+                Complete 2 more lessons to start competing in leagues!
+              </p>
+            </div>
+          </div>
+
+          {/* Widget 2: Daily Quests (Matches screenshot: Earn 10 XP with lightning & golden progress bar) */}
+          <div className="border-2 border-gray-200 dark:border-[#2b3940] rounded-2xl p-4 bg-white dark:bg-[#182228]">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-black text-gray-800 dark:text-white text-base">
+                Daily Quests
+              </h3>
+              <Link href="/profile" className="text-xs font-extrabold text-[#1cb0f6] uppercase tracking-wider hover:underline">
+                VIEW ALL
+              </Link>
+            </div>
+
+            <div className="flex items-center gap-3">
+              {/* Lightning Bolt Icon */}
+              <div className="w-10 h-10 rounded-xl bg-amber-400/20 flex items-center justify-center text-amber-500 shrink-0">
+                <Zap className="w-6 h-6 fill-amber-500" />
+              </div>
+
+              <div className="flex-1">
+                <p className="text-xs font-extrabold text-gray-700 dark:text-gray-200 mb-1.5">
+                  Earn 10 XP
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 h-3.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-amber-400 to-[#ffc800] rounded-full transition-all duration-500"
+                      style={{ width: `${Math.min(100, Math.round(((user.daily_xp || 10) / 10) * 100))}%` }}
+                    />
+                  </div>
+                  <span className="text-[10px] font-black text-amber-600 dark:text-amber-400">
+                    {user.daily_xp || 10}/10
+                  </span>
+                  <Gift className="w-4 h-4 text-amber-500 shrink-0" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Widget 3: Create a profile to save progress (Matches screenshot buttons) */}
+          <div className="border-2 border-gray-200 dark:border-[#2b3940] rounded-2xl p-4 bg-white dark:bg-[#182228] flex flex-col gap-3">
+            <h3 className="font-black text-gray-800 dark:text-white text-sm">
+              Create a profile to save your progress!
+            </h3>
+            <Link
+              href="/profile"
+              className="w-full text-center bg-[#58cc02] text-white font-black py-3 rounded-2xl text-xs uppercase tracking-wider shadow-[0_4px_0_#46a302] active:translate-y-0.5 active:shadow-none transition-all hover:brightness-105"
+            >
+              CREATE A PROFILE
+            </Link>
+            <Link
+              href="/profile"
+              className="w-full text-center bg-[#1cb0f6] text-white font-black py-3 rounded-2xl text-xs uppercase tracking-wider shadow-[0_4px_0_#0a8fc5] active:translate-y-0.5 active:shadow-none transition-all hover:brightness-105"
+            >
+              SIGN IN
+            </Link>
+          </div>
+
+          {/* Streak Simulation Testing Tool */}
+          <TestSimulateWidget currentStreak={user.streak ?? 1} />
+
+          {/* Footer Links (Matches screenshot bottom text) */}
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] font-bold text-gray-400 uppercase tracking-wider pt-2">
+            <span>ABOUT</span>
+            <span>&bull;</span>
+            <span>BLOG</span>
+            <span>&bull;</span>
+            <span>STORE</span>
+            <span>&bull;</span>
+            <span>EFFICACY</span>
+            <span>&bull;</span>
+            <span>CAREERS</span>
+          </div>
         </aside>
       </div>
     </>
   );
 }
 
-// ---------- Sub-components ----------
+// ---------- Skill Node Component matching Duolingo circular star buttons ----------
 
-function SkillNode({ skill, done, locked }: { skill: any; done: boolean; locked?: boolean }) {
-  const colors = {
-    done:     { bg: 'bg-[#ffc800]', border: 'border-[#e6ac00]', shadow: 'shadow-[0_6px_0_#b38600]' },
-    active:   { bg: 'bg-[#58cc02]', border: 'border-[#46a302]', shadow: 'shadow-[0_6px_0_#378000]' },
-    locked:   { bg: 'bg-gray-300 dark:bg-gray-700',  border: 'border-gray-400 dark:border-gray-600',  shadow: 'shadow-[0_6px_0_#888]' },
-  };
-  const style = done ? colors.done : locked ? colors.locked : colors.active;
-
-  return (
-    <div className={clsx(
-      'w-20 h-20 rounded-full flex items-center justify-center text-3xl font-extrabold transition-all duration-150 active:translate-y-1 active:shadow-none cursor-pointer',
-      style.bg,
-      style.shadow,
-      'border-b-[6px]',
-      style.border
-    )}>
-      {locked ? <Lock className="w-8 h-8 text-gray-500 dark:text-gray-400" /> : <span>{skill.icon}</span>}
-    </div>
-  );
-}
-
-function LegendaryTimedWidget() {
-  return (
-    <div className="border-2 border-purple-200 dark:border-purple-900/60 rounded-2xl p-4 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-[#201030] dark:to-[#18152c]">
-      <div className="flex items-center gap-2 mb-2">
-        <Sparkles className="w-5 h-5 text-[#ce82ff]" />
-        <p className="font-extrabold text-purple-950 dark:text-purple-200 text-sm">
-          Legendary Challenge
-        </p>
+function SkillNode({
+  skill,
+  done,
+  locked,
+  active,
+}: {
+  skill: any;
+  done: boolean;
+  locked?: boolean;
+  active?: boolean;
+}) {
+  if (locked) {
+    return (
+      <div className="relative w-20 h-20 rounded-full flex items-center justify-center bg-gray-200 dark:bg-[#202f36] border-b-[6px] border-gray-300 dark:border-[#18252b] shadow-[0_4px_0_#141f24] transition-all">
+        <Star className="w-8 h-8 text-gray-400 dark:text-gray-600 fill-gray-400 dark:fill-gray-600" />
       </div>
-      <p className="text-xs text-purple-800 dark:text-purple-300 mb-3">
-        Test your speed! 60s timed session for <span className="font-extrabold text-[#9d40e0] dark:text-[#ce82ff]">+40 XP</span>.
-      </p>
-      <Link
-        href="/lesson/1?mode=legendary"
-        className="flex items-center justify-center gap-2 w-full text-center text-xs font-extrabold text-white bg-[#ce82ff] hover:bg-[#b85eff] rounded-xl py-2.5 shadow-[0_3px_0_#8e26ca] active:translate-y-0.5 active:shadow-none transition-all uppercase tracking-wider"
-      >
-        <Timer className="w-4 h-4" />
-        Start Timed Practice
-      </Link>
-    </div>
-  );
-}
+    );
+  }
 
-function ProfileWidget({ user }: { user: any }) {
-  return (
-    <div className="border-2 border-gray-200 dark:border-[#2b3940] rounded-2xl p-4 bg-white dark:bg-[#182228]">
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-12 h-12 rounded-full bg-[#ddf4ff] dark:bg-[#103040] flex items-center justify-center text-2xl font-extrabold text-[#1cb0f6]">
-          {(user.display_name || user.username || 'L')[0].toUpperCase()}
-        </div>
-        <div>
-          <p className="font-extrabold text-gray-700 dark:text-white">{user.display_name || user.username}</p>
-          <p className="text-xs text-gray-400 font-semibold">{user.xp} Total XP</p>
-        </div>
+  if (done) {
+    return (
+      <div className="relative w-20 h-20 rounded-full flex items-center justify-center bg-[#ffc800] border-b-[6px] border-[#e6ac00] shadow-[0_6px_0_#b38600] active:translate-y-1 active:shadow-none transition-all cursor-pointer">
+        <Star className="w-9 h-9 text-white fill-white" />
       </div>
-      <Link
-        href="/profile"
-        className="block text-center text-xs font-extrabold uppercase tracking-wider text-[#1cb0f6] border-2 border-[#84d8ff] dark:border-[#105070] rounded-xl py-2 hover:bg-[#ddf4ff] dark:hover:bg-[#153545] transition-colors"
-      >
-        View Profile & Badges
-      </Link>
-    </div>
-  );
-}
+    );
+  }
 
-function DailyGoalWidget({ user }: { user: any }) {
-  const dailyXp = user.daily_xp ?? 0;
-  const dailyGoal = user.daily_goal ?? 50;
-  const pct = Math.min(100, Math.round((dailyXp / dailyGoal) * 100));
-  const done = dailyXp >= dailyGoal;
-
+  // Active Node with Progress Ring (Matches screenshot: bright green with outer track ring)
   return (
-    <div className="border-2 border-gray-200 dark:border-[#2b3940] rounded-2xl p-4 bg-white dark:bg-[#182228]">
-      <p className="font-extrabold text-gray-700 dark:text-white text-sm mb-3">Daily XP Goal</p>
-      <div className="flex items-center gap-3">
-        <span className="text-2xl">{done ? '🏆' : '🎯'}</span>
-        <div className="flex-1">
-          <div className="flex justify-between text-xs font-bold text-gray-500 dark:text-gray-400 mb-1">
-            <span>{dailyXp} XP</span>
-            <span>{dailyGoal} XP</span>
-          </div>
-          <div className="w-full h-3.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-            <div
-              className={clsx(
-                'h-full rounded-full transition-all duration-500',
-                done ? 'bg-[#58cc02]' : 'bg-[#ffc800]'
-              )}
-              style={{ width: `${pct}%` }}
-            />
-          </div>
-        </div>
+    <div className="relative flex items-center justify-center w-22 h-22">
+      {/* Outer circular progress track */}
+      <div className="absolute inset-0 rounded-full border-4 border-gray-200 dark:border-[#202f36]" />
+      <div className="absolute inset-0 rounded-full border-4 border-[#58cc02] border-t-transparent -rotate-45" />
+
+      {/* Center green button */}
+      <div className="w-18 h-18 rounded-full flex items-center justify-center bg-[#58cc02] border-b-[6px] border-[#46a302] shadow-[0_6px_0_#378000] active:translate-y-1 active:shadow-none transition-all cursor-pointer">
+        <Star className="w-9 h-9 text-white fill-white" />
       </div>
-      {done && (
-        <p className="text-xs text-[#58cc02] font-bold mt-2 text-center">Goal reached! Keep going!</p>
-      )}
     </div>
   );
 }

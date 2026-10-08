@@ -8,13 +8,13 @@
   --duo-orange: #ff9600;
   --duo-purple: #ce82ff;
   --duo-yellow: #ffc800;
-  --background: #ffffff;
-  --foreground: #3c3c3c;
+  --background: #131f24;
+  --foreground: #f0f0f0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #131f24;
+  color: #f0f0f0;
   font-family: "Din Round", "Nunito", ui-rounded, system-ui, sans-serif;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -22,7 +22,7 @@ body {
 /* ============================================================ */
 /* DARK MODE (Duolingo Palette: Deep Charcoal / Navy)           */
 /* ============================================================ */
-html.dark, body.dark {
+html.dark, body.dark, html:not(.light) body {
   --background: #131f24;
   --foreground: #f0f0f0;
   background-color: #131f24 !important;
@@ -32,37 +32,68 @@ html.dark, body.dark {
 html.dark aside,
 html.dark header,
 html.dark nav,
-html.dark .bg-white {
+html.dark .bg-white,
+html:not(.light) aside,
+html:not(.light) header,
+html:not(.light) nav,
+html:not(.light) .bg-white {
   background-color: #182228 !important;
 }
 
 html.dark .border-gray-100,
 html.dark .border-gray-200,
-html.dark .border-gray-300 {
+html.dark .border-gray-300,
+html:not(.light) .border-gray-100,
+html:not(.light) .border-gray-200,
+html:not(.light) .border-gray-300 {
   border-color: #2b3940 !important;
 }
 
-html.dark .text-gray-700 {
+html.dark .text-gray-700,
+html:not(.light) .text-gray-700 {
   color: #f3f4f6 !important;
 }
 
-html.dark .text-gray-500 {
+html.dark .text-gray-500,
+html:not(.light) .text-gray-500 {
   color: #9ca3af !important;
 }
 
-html.dark .text-gray-400 {
+html.dark .text-gray-400,
+html:not(.light) .text-gray-400 {
   color: #6b7280 !important;
 }
 
 html.dark .hover\:bg-gray-50:hover,
-html.dark .hover\:bg-gray-100:hover {
+html.dark .hover\:bg-gray-100:hover,
+html:not(.light) .hover\:bg-gray-50:hover,
+html:not(.light) .hover\:bg-gray-100:hover {
   background-color: #202f36 !important;
 }
 
 html.dark .bg-gray-100,
-html.dark .bg-gray-200 {
+html.dark .bg-gray-200,
+html:not(.light) .bg-gray-100,
+html:not(.light) .bg-gray-200 {
   background-color: #2b3940 !important;
 }
+
+/* Light mode overrides when user explicitly toggles */
+html.light, body.light {
+  background-color: #ffffff !important;
+  color: #3c3c3c !important;
+}
+html.light aside,
+html.light header,
+html.light nav,
+html.light .bg-white {
+  background-color: #ffffff !important;
+}
+html.light .text-gray-700 { color: #374151 !important; }
+html.light .text-gray-500 { color: #6b7280 !important; }
+html.light .text-gray-400 { color: #9ca3af !important; }
+html.light .border-gray-100 { border-color: #f3f4f6 !important; }
+html.light .border-gray-200 { border-color: #e5e7eb !important; }
 
 /* Duolingo-style bouncy button press */
 .btn-press:active {
@@ -77,6 +108,73 @@ html.dark .bg-gray-200 {
 }
 .skill-node:hover {
   animation: wobble 0.4s ease-in-out;
+}
+
+/* ============================================================ */
+/* DUO OWL MASCOT ANIMATIONS (Breathing, Floating, Waving)       */
+/* ============================================================ */
+@keyframes duo-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+.duo-float {
+  animation: duo-float 3s ease-in-out infinite;
+}
+
+@keyframes duo-shadow {
+  0%, 100% {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(0.85);
+    opacity: 0.15;
+  }
+}
+.duo-shadow {
+  animation: duo-shadow 3s ease-in-out infinite;
+}
+
+@keyframes duo-left-wing {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  30%, 40% {
+    transform: rotate(-18deg) translateY(-2px);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+}
+.duo-left-wing {
+  transform-origin: 22px 50px;
+  animation: duo-left-wing 3.5s ease-in-out infinite;
+}
+
+@keyframes duo-pupils {
+  0%, 90%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+.duo-pupils {
+  transform-origin: 50px 47px;
+  animation: duo-pupils 4s ease-in-out infinite;
+}
+
+/* Start tooltip bounce */
+@keyframes start-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.start-bounce {
+  animation: start-bounce 1.5s ease-in-out infinite;
 }
 
 /* Celebration bounce */
