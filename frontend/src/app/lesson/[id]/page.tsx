@@ -53,8 +53,8 @@ export default async function LessonPage({ params, searchParams }: LessonPagePro
           id: 105,
           type: 'match_pairs',
           question: 'Match the pairs',
-          options: '[{"left":"woman","right":"mujer"},{"left":"man","right":"hombre"},{"left":"water","right":"agua"},{"left":"bread","right":"pan"}]',
-          answer: 'pairs',
+          options: '{"pairs":[{"left":"woman","right":"mujer"},{"left":"man","right":"hombre"},{"left":"water","right":"agua"},{"left":"bread","right":"pan"}]}',
+          answer: 'matched',
         },
       ],
       2: [

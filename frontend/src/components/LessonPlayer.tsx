@@ -362,7 +362,7 @@ export default function LessonPlayer({
         {current.type === 'match_pairs' && (
           <MatchPairsExercise
             key={currentIndex}
-            pairs={options.pairs || []}
+            pairs={options.pairs || (Array.isArray(options) ? options : [])}
             isChecked={isChecked}
             onComplete={() => setSelectedAnswer('matched')}
           />
