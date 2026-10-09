@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { fetchUnits, fetchUser } from '@/lib/api';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import TopBar from '@/components/TopBar';
 import TestSimulateWidget from '@/components/TestSimulateWidget';
@@ -11,6 +12,8 @@ import { Lock, Crown, Star, BookOpen, Shield, Zap, Gift } from 'lucide-react';
 const PATH_OFFSETS = [-45, 0, 45, 0];
 
 export default async function HomePage() {
+  const cookieStore = await cookies();
+  const localCompleted = cookieStore.getAll().filter((c: any) => c.name.startsWith("completed_")).map((c: any) => parseInt(c.name.split("_")[1]));
   let units: any[] = [];
   let user: any;
   try {
@@ -47,10 +50,11 @@ export default async function HomePage() {
     };
   }
 
-  const completedSet = new Set<number>(user.completed_skills as number[]);
+  const completedSet = new Set<number>([ ...(user.completed_skills as number[]), ...localCompleted ]);
 
   function isUnlocked(allSkills: any[], index: number): boolean {
-    return true; // Unlocked for easy testing/demo
+    if (index === 0) return true;
+    return completedSet.has(allSkills[index - 1].id);
   }
 
   return (
@@ -89,14 +93,6 @@ export default async function HomePage() {
 
                 {/* Skill Nodes Path */}
                 <div className="relative flex flex-col items-center gap-9 py-2">
-                  {/* ANIMATED DUO THE OWL MASCOT (Placed on the path beside node 2/3 just like screenshot) */}
-                  <div
-                    className="absolute right-4 sm:right-10 top-[140px] z-20 flex flex-col items-center pointer-events-none select-none"
-                    style={{ transform: 'translateX(20px)' }}
-                  >
-                    <DuoMascot className="w-24 h-24 sm:w-28 sm:h-28" />
-                  </div>
-
                   {skills.map((skill: any, idx: number) => {
                     const done = completedSet.has(skill.id);
                     const unlocked = isUnlocked(skills, idx);
@@ -112,6 +108,14 @@ export default async function HomePage() {
                         {/* Connector track line above (except first) */}
                         {idx > 0 && (
                           <div className="absolute -top-9 left-1/2 -translate-x-1/2 w-2 h-9 bg-gray-200 dark:bg-[#202f36] rounded-full" />
+                        )}
+
+                        
+                        {/* ANIMATED DUO THE OWL MASCOT */}
+                        {isFirstActive && (
+                          <div className="absolute right-[-80px] sm:right-[-120px] top-0 z-20 flex flex-col items-center pointer-events-none select-none">
+                            <DuoMascot className="w-24 h-24 sm:w-28 sm:h-28" />
+                          </div>
                         )}
 
                         {/* Floating "START" speech bubble for the active node (Authentic dark tooltip with bright green text) */}

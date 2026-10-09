@@ -429,6 +429,13 @@ export default async function LessonPage({ params, searchParams }: LessonPagePro
     }
   ]
 };
+
+    lesson = {
+      id: skillId || 1,
+      skill_id: skillId || 1,
+      order: 1,
+      exercises: fallbackExercises[skillId as keyof typeof fallbackExercises] || fallbackExercises[1],
+    };
   }
 
   return (

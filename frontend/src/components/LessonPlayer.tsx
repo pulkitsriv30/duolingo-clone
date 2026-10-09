@@ -118,6 +118,7 @@ export default function LessonPlayer({
   const finishLesson = async () => {
     setIsFinished(true);
     playSound('complete');
+    document.cookie = `completed_${skillId}=true; path=/; max-age=3600`;
     try {
       await completeSkill(USER_ID, skillId, xpReward);
     } catch {
