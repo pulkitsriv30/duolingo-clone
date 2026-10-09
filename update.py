@@ -1,4 +1,6 @@
+import os, json, re
 
+seed_content = """
 import json
 from database import engine, Base
 import models
@@ -103,3 +105,43 @@ def seed_db():
 
 if __name__ == '__main__':
     seed_db()
+"""
+
+with open('backend/seed.py', 'w', encoding='utf-8') as f:
+    f.write(seed_content)
+
+fallback = {}
+lesson_map = {1: 'intro_exercises', 2: 'greet_exercises', 3: 'animal_exercises', 4: 'food_exercises', 5: 'number_exercises', 6: 'color_exercises', 7: 'travel_exercises', 8: 'restaurant_exercises'}
+import sqlite3
+# Assuming sqlite DB is generated from seed.py, let's re-run seed.py to update db first
+import subprocess
+subprocess.run(['backend/venv/Scripts/python.exe', 'backend/seed.py'])
+
+conn = sqlite3.connect('backend/duolingo.db')
+cur = conn.cursor()
+for lesson_id in range(1, 9):
+    cur.execute("SELECT id, type, question, options, answer FROM exercises WHERE lesson_id=?", (lesson_id,))
+    exs = []
+    for r in cur.fetchall():
+        exs.append({
+            "id": r[0],
+            "type": r[1],
+            "question": r[2],
+            "options": r[3],
+            "answer": r[4]
+        })
+    fallback[lesson_id] = exs
+conn.close()
+
+fallback_json = json.dumps(fallback, indent=2, ensure_ascii=False)
+
+path = 'frontend/src/app/lesson/[id]/page.tsx'
+with open(path, 'r', encoding='utf-8') as f:
+    content = f.read()
+
+new_content = re.sub(r'const fallbackExercises: Record<number, any\[\]> = \{[\s\S]*?\};', 'const fallbackExercises: Record<number, any[]> = ' + fallback_json + ';', content)
+
+with open(path, 'w', encoding='utf-8') as f:
+    f.write(new_content)
+
+print("Successfully updated seed.py, duolingo.db, and fallback json!")

@@ -50,8 +50,7 @@ export default async function HomePage() {
   const completedSet = new Set<number>(user.completed_skills as number[]);
 
   function isUnlocked(allSkills: any[], index: number): boolean {
-    if (index === 0) return true;
-    return completedSet.has(allSkills[index - 1].id);
+    return true; // Unlocked for easy testing/demo
   }
 
   return (
