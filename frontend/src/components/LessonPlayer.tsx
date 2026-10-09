@@ -361,6 +361,7 @@ export default function LessonPlayer({
 
         {current.type === 'match_pairs' && (
           <MatchPairsExercise
+            key={currentIndex}
             pairs={options.pairs || []}
             isChecked={isChecked}
             onComplete={() => setSelectedAnswer('matched')}

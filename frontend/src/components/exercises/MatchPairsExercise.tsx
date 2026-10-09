@@ -23,7 +23,7 @@ export default function MatchPairsExercise({ pairs, isChecked, onComplete }: Pro
   const [rightItems] = useState(() => [...pairs].sort(() => Math.random() - 0.5));
 
   useEffect(() => {
-    if (matched.size === pairs.length && pairs.length > 0) {
+    if (matched.size === pairs.length * 2 && pairs.length > 0) {
       onComplete();
     }
   }, [matched, pairs.length, onComplete]);
