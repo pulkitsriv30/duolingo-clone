@@ -22,220 +22,409 @@ export default async function LessonPage({ params, searchParams }: LessonPagePro
     const fallbackExercises: Record<number, any[]> = {
   "1": [
     {
-      "id": 1,
+      "id": 101,
       "type": "multiple_choice",
       "question": "Which one of these is \"suitcase\"?",
-      "options": "\"[\\"casa\\", \\"leche\\", \\"maleta\\"]\"",
-      "answer": "maleta"
+      "options": [
+        "🏠 casa",
+        "🥛 leche",
+        "🧳 maleta"
+      ],
+      "answer": "🧳 maleta"
     },
     {
-      "id": 2,
+      "id": 102,
+      "type": "match_pairs",
+      "question": "Match the pairs",
+      "options": {
+        "pairs": [
+          {
+            "left": "woman",
+            "right": "mujer"
+          },
+          {
+            "left": "man",
+            "right": "hombre"
+          },
+          {
+            "left": "water",
+            "right": "agua"
+          },
+          {
+            "left": "bread",
+            "right": "pan"
+          }
+        ]
+      },
+      "answer": "matched"
+    },
+    {
+      "id": 103,
       "type": "translate",
       "question": "The woman drinks water.",
-      "options": "\"[\\"la\\", \\"mujer\\", \\"bebe\\", \\"agua\\", \\"el\\", \\"hombre\\", \\"come\\"]\"",
+      "options": [
+        "la",
+        "mujer",
+        "bebe",
+        "agua",
+        "el",
+        "hombre",
+        "come"
+      ],
       "answer": "la mujer bebe agua"
     },
     {
-      "id": 3,
-      "type": "type_answer",
-      "question": "Type the Spanish word for 'water'",
-      "options": "\"[]\"",
-      "answer": "agua"
-    },
-    {
-      "id": 4,
+      "id": 104,
       "type": "fill_blank",
       "question": "El hombre ___ pan.",
-      "options": "\"[\\"come\\", \\"bebe\\", \\"es\\", \\"tiene\\"]\"",
+      "options": [
+        "come",
+        "bebe",
+        "es",
+        "tiene"
+      ],
       "answer": "come"
     },
     {
-      "id": 5,
-      "type": "multiple_choice",
-      "question": "Which of these means 'the girl'?",
-      "options": "\"[\\"la ni\\u00f1a\\", \\"el ni\\u00f1o\\", \\"la mujer\\", \\"el hombre\\"]\"",
-      "answer": "la niña"
+      "id": 105,
+      "type": "type_answer",
+      "question": "Type the Spanish word for 'water'",
+      "options": [],
+      "answer": "agua"
     }
   ],
   "2": [
     {
-      "id": 6,
+      "id": 201,
       "type": "multiple_choice",
       "question": "How do you say 'Good morning' in Spanish?",
-      "options": "\"[\\"Buenos d\\u00edas\\", \\"Buenas noches\\", \\"Buenas tardes\\", \\"Hola\\"]\"",
-      "answer": "Buenos días"
+      "options": [
+        "🌅 Buenos días",
+        "🌙 Buenas noches",
+        "🌇 Buenas tardes",
+        "👋 Hola"
+      ],
+      "answer": "🌅 Buenos días"
     },
     {
-      "id": 7,
+      "id": 202,
+      "type": "match_pairs",
+      "question": "Match the words to their translations",
+      "options": {
+        "pairs": [
+          {
+            "left": "Hola",
+            "right": "Hello"
+          },
+          {
+            "left": "Adiós",
+            "right": "Goodbye"
+          },
+          {
+            "left": "Gracias",
+            "right": "Thank you"
+          },
+          {
+            "left": "Por favor",
+            "right": "Please"
+          }
+        ]
+      },
+      "answer": "matched"
+    },
+    {
+      "id": 203,
       "type": "translate",
       "question": "How are you?",
-      "options": "\"[\\"\\u00bfC\\u00f3mo\\", \\"est\\u00e1s\\", \\"t\\u00fa\\", \\"te\\", \\"llamas\\", \\"?\\", \\"\\u00bfQu\\u00e9\\"]\"",
+      "options": [
+        "¿Cómo",
+        "estás",
+        "tú",
+        "te",
+        "llamas",
+        "?",
+        "¿Qué"
+      ],
       "answer": "¿Cómo estás?"
     },
     {
-      "id": 8,
+      "id": 204,
       "type": "type_answer",
       "question": "Type the Spanish word for 'goodbye'",
-      "options": "\"[]\"",
+      "options": [],
       "answer": "adiós"
-    },
-    {
-      "id": 9,
-      "type": "match_pairs",
-      "question": "Match the words to their translations",
-      "options": "\"{\\"pairs\\": [{\\"left\\": \\"Hola\\", \\"right\\": \\"Hello\\"}, {\\"left\\": \\"Adi\\u00f3s\\", \\"right\\": \\"Goodbye\\"}, {\\"left\\": \\"Gracias\\", \\"right\\": \\"Thank you\\"}, {\\"left\\": \\"Por favor\\", \\"right\\": \\"Please\\"}]}\"",
-      "answer": "matched"
     }
   ],
   "3": [
     {
-      "id": 10,
+      "id": 301,
       "type": "multiple_choice",
       "question": "Which of these means 'the dog'?",
-      "options": "\"[\\"el perro\\", \\"el gato\\", \\"el p\\u00e1jaro\\", \\"el pez\\"]\"",
-      "answer": "el perro"
+      "options": [
+        "🐶 el perro",
+        "🐱 el gato",
+        "🐦 el pájaro",
+        "🐟 el pez"
+      ],
+      "answer": "🐶 el perro"
     },
     {
-      "id": 11,
+      "id": 302,
+      "type": "multiple_choice",
+      "question": "Which of these means 'the bird'?",
+      "options": [
+        "🐦 el pájaro",
+        "🐟 el pez",
+        "🐱 el gato",
+        "🐶 el perro"
+      ],
+      "answer": "🐦 el pájaro"
+    },
+    {
+      "id": 303,
       "type": "translate",
       "question": "The cat drinks milk.",
-      "options": "\"[\\"el\\", \\"gato\\", \\"bebe\\", \\"leche\\", \\"come\\", \\"la\\", \\"perro\\"]\"",
+      "options": [
+        "el",
+        "gato",
+        "bebe",
+        "leche",
+        "come",
+        "la",
+        "perro"
+      ],
       "answer": "el gato bebe leche"
     },
     {
-      "id": 12,
+      "id": 304,
       "type": "fill_blank",
       "question": "El ___ es grande.",
-      "options": "\"[\\"perro\\", \\"leche\\", \\"agua\\", \\"ni\\u00f1a\\"]\"",
+      "options": [
+        "perro",
+        "leche",
+        "agua",
+        "niña"
+      ],
       "answer": "perro"
-    },
-    {
-      "id": 13,
-      "type": "multiple_choice",
-      "question": "Which of these means 'the bird'?",
-      "options": "\"[\\"el p\\u00e1jaro\\", \\"el pez\\", \\"el gato\\", \\"el perro\\"]\"",
-      "answer": "el pájaro"
     }
   ],
   "4": [
     {
-      "id": 14,
+      "id": 401,
       "type": "multiple_choice",
       "question": "Which of these means 'the apple'?",
-      "options": "\"[\\"la manzana\\", \\"el pan\\", \\"la leche\\", \\"el agua\\"]\"",
-      "answer": "la manzana"
+      "options": [
+        "🍎 la manzana",
+        "🍞 el pan",
+        "🥛 la leche",
+        "💧 el agua"
+      ],
+      "answer": "🍎 la manzana"
     },
     {
-      "id": 15,
+      "id": 402,
+      "type": "match_pairs",
+      "question": "Match food words to translations",
+      "options": {
+        "pairs": [
+          {
+            "left": "manzana",
+            "right": "apple"
+          },
+          {
+            "left": "pan",
+            "right": "bread"
+          },
+          {
+            "left": "leche",
+            "right": "milk"
+          },
+          {
+            "left": "queso",
+            "right": "cheese"
+          }
+        ]
+      },
+      "answer": "matched"
+    },
+    {
+      "id": 403,
       "type": "translate",
       "question": "I eat bread and cheese.",
-      "options": "\"[\\"Yo\\", \\"como\\", \\"pan\\", \\"y\\", \\"queso\\", \\"bebo\\", \\"leche\\"]\"",
+      "options": [
+        "Yo",
+        "como",
+        "pan",
+        "y",
+        "queso",
+        "bebo",
+        "leche"
+      ],
       "answer": "Yo como pan y queso"
     },
     {
-      "id": 16,
+      "id": 404,
       "type": "type_answer",
       "question": "Type the Spanish word for 'bread'",
-      "options": "\"[]\"",
+      "options": [],
       "answer": "pan"
-    },
-    {
-      "id": 17,
-      "type": "match_pairs",
-      "question": "Match food words to translations",
-      "options": "\"{\\"pairs\\": [{\\"left\\": \\"manzana\\", \\"right\\": \\"apple\\"}, {\\"left\\": \\"pan\\", \\"right\\": \\"bread\\"}, {\\"left\\": \\"leche\\", \\"right\\": \\"milk\\"}, {\\"left\\": \\"queso\\", \\"right\\": \\"cheese\\"}]}\"",
-      "answer": "matched"
     }
   ],
   "5": [
     {
-      "id": 18,
+      "id": 501,
       "type": "multiple_choice",
       "question": "How do you say '3' in Spanish?",
-      "options": "\"[\\"tres\\", \\"dos\\", \\"cuatro\\", \\"uno\\"]\"",
-      "answer": "tres"
+      "options": [
+        "3️⃣ tres",
+        "2️⃣ dos",
+        "4️⃣ cuatro",
+        "1️⃣ uno"
+      ],
+      "answer": "3️⃣ tres"
     },
     {
-      "id": 19,
+      "id": 502,
       "type": "fill_blank",
       "question": "___ más dos son cinco.",
-      "options": "\"[\\"Tres\\", \\"Cuatro\\", \\"Uno\\", \\"Seis\\"]\"",
+      "options": [
+        "Tres",
+        "Cuatro",
+        "Uno",
+        "Seis"
+      ],
       "answer": "Tres"
     },
     {
-      "id": 20,
+      "id": 503,
       "type": "type_answer",
       "question": "Type the Spanish word for '10'",
-      "options": "\"[]\"",
+      "options": [],
       "answer": "diez"
     }
   ],
   "6": [
     {
-      "id": 21,
+      "id": 601,
       "type": "multiple_choice",
       "question": "Which of these means 'blue'?",
-      "options": "\"[\\"azul\\", \\"rojo\\", \\"verde\\", \\"amarillo\\"]\"",
-      "answer": "azul"
+      "options": [
+        "🔵 azul",
+        "🔴 rojo",
+        "🟢 verde",
+        "🟡 amarillo"
+      ],
+      "answer": "🔵 azul"
     },
     {
-      "id": 22,
+      "id": 602,
       "type": "match_pairs",
       "question": "Match colors to translations",
-      "options": "\"{\\"pairs\\": [{\\"left\\": \\"rojo\\", \\"right\\": \\"red\\"}, {\\"left\\": \\"azul\\", \\"right\\": \\"blue\\"}, {\\"left\\": \\"verde\\", \\"right\\": \\"green\\"}, {\\"left\\": \\"amarillo\\", \\"right\\": \\"yellow\\"}]}\"",
+      "options": {
+        "pairs": [
+          {
+            "left": "rojo",
+            "right": "red"
+          },
+          {
+            "left": "azul",
+            "right": "blue"
+          },
+          {
+            "left": "verde",
+            "right": "green"
+          },
+          {
+            "left": "amarillo",
+            "right": "yellow"
+          }
+        ]
+      },
       "answer": "matched"
     },
     {
-      "id": 23,
+      "id": 603,
       "type": "type_answer",
       "question": "Type the Spanish word for 'green'",
-      "options": "\"[]\"",
+      "options": [],
       "answer": "verde"
     }
   ],
   "7": [
     {
-      "id": 24,
+      "id": 701,
       "type": "multiple_choice",
       "question": "How do you say 'the airport'?",
-      "options": "\"[\\"el aeropuerto\\", \\"el hotel\\", \\"el tren\\", \\"el autob\\u00fas\\"]\"",
-      "answer": "el aeropuerto"
+      "options": [
+        "✈️ el aeropuerto",
+        "🏨 el hotel",
+        "🚆 el tren",
+        "🚌 el autobús"
+      ],
+      "answer": "✈️ el aeropuerto"
     },
     {
-      "id": 25,
+      "id": 702,
       "type": "translate",
       "question": "Where is the hotel?",
-      "options": "\"[\\"\\u00bfD\\u00f3nde\\", \\"est\\u00e1\\", \\"el\\", \\"hotel\\", \\"aeropuerto\\", \\"?\\", \\"tren\\"]\"",
+      "options": [
+        "¿Dónde",
+        "está",
+        "el",
+        "hotel",
+        "aeropuerto",
+        "?",
+        "tren"
+      ],
       "answer": "¿Dónde está el hotel?"
     },
     {
-      "id": 26,
+      "id": 703,
       "type": "fill_blank",
       "question": "El ___ llega a las diez.",
-      "options": "\"[\\"tren\\", \\"manzana\\", \\"perro\\", \\"agua\\"]\"",
+      "options": [
+        "tren",
+        "manzana",
+        "perro",
+        "agua"
+      ],
       "answer": "tren"
     }
   ],
   "8": [
     {
-      "id": 27,
+      "id": 801,
       "type": "multiple_choice",
       "question": "How do you say 'the menu'?",
-      "options": "\"[\\"el men\\u00fa\\", \\"la cuenta\\", \\"el mesero\\", \\"la mesa\\"]\"",
-      "answer": "el menú"
+      "options": [
+        "📋 el menú",
+        "🧾 la cuenta",
+        "🤵 el mesero",
+        "🍽️ la mesa"
+      ],
+      "answer": "📋 el menú"
     },
     {
-      "id": 28,
+      "id": 802,
       "type": "translate",
       "question": "I would like the chicken please.",
-      "options": "\"[\\"Quisiera\\", \\"el\\", \\"pollo\\", \\"por\\", \\"favor\\", \\"la\\", \\"carne\\", \\"gracias\\"]\"",
+      "options": [
+        "Quisiera",
+        "el",
+        "pollo",
+        "por",
+        "favor",
+        "la",
+        "carne",
+        "gracias"
+      ],
       "answer": "Quisiera el pollo por favor"
     },
     {
-      "id": 29,
+      "id": 803,
       "type": "type_answer",
       "question": "Type the Spanish word for 'water' (used at a restaurant)",
-      "options": "\"[]\"",
+      "options": [],
       "answer": "agua"
     }
   ]

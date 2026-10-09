@@ -43,56 +43,56 @@ def seed_db():
     db.commit()
 
     intro_exercises = [
-        models.Exercise(lesson_id=l1.id, type="multiple_choice", question="Which one of these is 'suitcase'?", options=json.dumps(["🏠 casa", "🥛 leche", "🧳 maleta"]), answer="🧳 maleta"),
-        models.Exercise(lesson_id=l1.id, type="match_pairs", question="Match the pairs", options=json.dumps({"pairs": [{"left": "woman", "right": "mujer"}, {"left": "man", "right": "hombre"}, {"left": "water", "right": "agua"}, {"left": "bread", "right": "pan"}]}), answer="matched"),
-        models.Exercise(lesson_id=l1.id, type="translate", question="The woman drinks water.", options=json.dumps(["la", "mujer", "bebe", "agua", "el", "hombre", "come"]), answer="la mujer bebe agua"),
-        models.Exercise(lesson_id=l1.id, type="fill_blank", question="El hombre ___ pan.", options=json.dumps(["come", "bebe", "es", "tiene"]), answer="come"),
-        models.Exercise(lesson_id=l1.id, type="type_answer", question="Type the Spanish word for 'water'", options=json.dumps([]), answer="agua")
+        models.Exercise(lesson_id=l1.id, type="multiple_choice", question="Which one of these is 'suitcase'?", options=["🏠 casa", "🥛 leche", "🧳 maleta"]), answer="🧳 maleta"),
+        models.Exercise(lesson_id=l1.id, type="match_pairs", question="Match the pairs", options={"pairs": [{"left": "woman", "right": "mujer"}, {"left": "man", "right": "hombre"}, {"left": "water", "right": "agua"}, {"left": "bread", "right": "pan"}]}), answer="matched"),
+        models.Exercise(lesson_id=l1.id, type="translate", question="The woman drinks water.", options=["la", "mujer", "bebe", "agua", "el", "hombre", "come"]), answer="la mujer bebe agua"),
+        models.Exercise(lesson_id=l1.id, type="fill_blank", question="El hombre ___ pan.", options=["come", "bebe", "es", "tiene"]), answer="come"),
+        models.Exercise(lesson_id=l1.id, type="type_answer", question="Type the Spanish word for 'water'", options=[]), answer="agua")
     ]
 
     greet_exercises = [
-        models.Exercise(lesson_id=l2.id, type="multiple_choice", question="How do you say 'Good morning' in Spanish?", options=json.dumps(["🌅 Buenos días", "🌙 Buenas noches", "🌇 Buenas tardes", "👋 Hola"]), answer="🌅 Buenos días"),
-        models.Exercise(lesson_id=l2.id, type="match_pairs", question="Match the words to their translations", options=json.dumps({"pairs": [{"left": "Hola", "right": "Hello"}, {"left": "Adiós", "right": "Goodbye"}, {"left": "Gracias", "right": "Thank you"}, {"left": "Por favor", "right": "Please"}]}), answer="matched"),
-        models.Exercise(lesson_id=l2.id, type="translate", question="How are you?", options=json.dumps(["¿Cómo", "estás", "tú", "te", "llamas", "?", "¿Qué"]), answer="¿Cómo estás?"),
-        models.Exercise(lesson_id=l2.id, type="type_answer", question="Type the Spanish word for 'goodbye'", options=json.dumps([]), answer="adiós")
+        models.Exercise(lesson_id=l2.id, type="multiple_choice", question="How do you say 'Good morning' in Spanish?", options=["🌅 Buenos días", "🌙 Buenas noches", "🌇 Buenas tardes", "👋 Hola"]), answer="🌅 Buenos días"),
+        models.Exercise(lesson_id=l2.id, type="match_pairs", question="Match the words to their translations", options={"pairs": [{"left": "Hola", "right": "Hello"}, {"left": "Adiós", "right": "Goodbye"}, {"left": "Gracias", "right": "Thank you"}, {"left": "Por favor", "right": "Please"}]}), answer="matched"),
+        models.Exercise(lesson_id=l2.id, type="translate", question="How are you?", options=["¿Cómo", "estás", "tú", "te", "llamas", "?", "¿Qué"]), answer="¿Cómo estás?"),
+        models.Exercise(lesson_id=l2.id, type="type_answer", question="Type the Spanish word for 'goodbye'", options=[]), answer="adiós")
     ]
 
     animal_exercises = [
-        models.Exercise(lesson_id=l3.id, type="multiple_choice", question="Which of these means 'the dog'?", options=json.dumps(["🐶 el perro", "🐱 el gato", "🐦 el pájaro", "🐟 el pez"]), answer="🐶 el perro"),
-        models.Exercise(lesson_id=l3.id, type="multiple_choice", question="Which of these means 'the bird'?", options=json.dumps(["🐦 el pájaro", "🐟 el pez", "🐱 el gato", "🐶 el perro"]), answer="🐦 el pájaro"),
-        models.Exercise(lesson_id=l3.id, type="translate", question="The cat drinks milk.", options=json.dumps(["el", "gato", "bebe", "leche", "come", "la", "perro"]), answer="el gato bebe leche"),
-        models.Exercise(lesson_id=l3.id, type="fill_blank", question="El ___ es grande.", options=json.dumps(["perro", "leche", "agua", "niña"]), answer="perro")
+        models.Exercise(lesson_id=l3.id, type="multiple_choice", question="Which of these means 'the dog'?", options=["🐶 el perro", "🐱 el gato", "🐦 el pájaro", "🐟 el pez"]), answer="🐶 el perro"),
+        models.Exercise(lesson_id=l3.id, type="multiple_choice", question="Which of these means 'the bird'?", options=["🐦 el pájaro", "🐟 el pez", "🐱 el gato", "🐶 el perro"]), answer="🐦 el pájaro"),
+        models.Exercise(lesson_id=l3.id, type="translate", question="The cat drinks milk.", options=["el", "gato", "bebe", "leche", "come", "la", "perro"]), answer="el gato bebe leche"),
+        models.Exercise(lesson_id=l3.id, type="fill_blank", question="El ___ es grande.", options=["perro", "leche", "agua", "niña"]), answer="perro")
     ]
 
     food_exercises = [
-        models.Exercise(lesson_id=l4.id, type="multiple_choice", question="Which of these means 'the apple'?", options=json.dumps(["🍎 la manzana", "🍞 el pan", "🥛 la leche", "💧 el agua"]), answer="🍎 la manzana"),
-        models.Exercise(lesson_id=l4.id, type="match_pairs", question="Match food words to translations", options=json.dumps({"pairs": [{"left": "manzana", "right": "apple"}, {"left": "pan", "right": "bread"}, {"left": "leche", "right": "milk"}, {"left": "queso", "right": "cheese"}]}), answer="matched"),
-        models.Exercise(lesson_id=l4.id, type="translate", question="I eat bread and cheese.", options=json.dumps(["Yo", "como", "pan", "y", "queso", "bebo", "leche"]), answer="Yo como pan y queso"),
-        models.Exercise(lesson_id=l4.id, type="type_answer", question="Type the Spanish word for 'bread'", options=json.dumps([]), answer="pan")
+        models.Exercise(lesson_id=l4.id, type="multiple_choice", question="Which of these means 'the apple'?", options=["🍎 la manzana", "🍞 el pan", "🥛 la leche", "💧 el agua"]), answer="🍎 la manzana"),
+        models.Exercise(lesson_id=l4.id, type="match_pairs", question="Match food words to translations", options={"pairs": [{"left": "manzana", "right": "apple"}, {"left": "pan", "right": "bread"}, {"left": "leche", "right": "milk"}, {"left": "queso", "right": "cheese"}]}), answer="matched"),
+        models.Exercise(lesson_id=l4.id, type="translate", question="I eat bread and cheese.", options=["Yo", "como", "pan", "y", "queso", "bebo", "leche"]), answer="Yo como pan y queso"),
+        models.Exercise(lesson_id=l4.id, type="type_answer", question="Type the Spanish word for 'bread'", options=[]), answer="pan")
     ]
 
     number_exercises = [
-        models.Exercise(lesson_id=l5.id, type="multiple_choice", question="How do you say '3' in Spanish?", options=json.dumps(["3️⃣ tres", "2️⃣ dos", "4️⃣ cuatro", "1️⃣ uno"]), answer="3️⃣ tres"),
-        models.Exercise(lesson_id=l5.id, type="fill_blank", question="___ más dos son cinco.", options=json.dumps(["Tres", "Cuatro", "Uno", "Seis"]), answer="Tres"),
-        models.Exercise(lesson_id=l5.id, type="type_answer", question="Type the Spanish word for '10'", options=json.dumps([]), answer="diez")
+        models.Exercise(lesson_id=l5.id, type="multiple_choice", question="How do you say '3' in Spanish?", options=["3️⃣ tres", "2️⃣ dos", "4️⃣ cuatro", "1️⃣ uno"]), answer="3️⃣ tres"),
+        models.Exercise(lesson_id=l5.id, type="fill_blank", question="___ más dos son cinco.", options=["Tres", "Cuatro", "Uno", "Seis"]), answer="Tres"),
+        models.Exercise(lesson_id=l5.id, type="type_answer", question="Type the Spanish word for '10'", options=[]), answer="diez")
     ]
 
     color_exercises = [
-        models.Exercise(lesson_id=l6.id, type="multiple_choice", question="Which of these means 'blue'?", options=json.dumps(["🔵 azul", "🔴 rojo", "🟢 verde", "🟡 amarillo"]), answer="🔵 azul"),
-        models.Exercise(lesson_id=l6.id, type="match_pairs", question="Match colors to translations", options=json.dumps({"pairs": [{"left": "rojo", "right": "red"}, {"left": "azul", "right": "blue"}, {"left": "verde", "right": "green"}, {"left": "amarillo", "right": "yellow"}]}), answer="matched"),
-        models.Exercise(lesson_id=l6.id, type="type_answer", question="Type the Spanish word for 'green'", options=json.dumps([]), answer="verde")
+        models.Exercise(lesson_id=l6.id, type="multiple_choice", question="Which of these means 'blue'?", options=["🔵 azul", "🔴 rojo", "🟢 verde", "🟡 amarillo"]), answer="🔵 azul"),
+        models.Exercise(lesson_id=l6.id, type="match_pairs", question="Match colors to translations", options={"pairs": [{"left": "rojo", "right": "red"}, {"left": "azul", "right": "blue"}, {"left": "verde", "right": "green"}, {"left": "amarillo", "right": "yellow"}]}), answer="matched"),
+        models.Exercise(lesson_id=l6.id, type="type_answer", question="Type the Spanish word for 'green'", options=[]), answer="verde")
     ]
 
     travel_exercises = [
-        models.Exercise(lesson_id=l7.id, type="multiple_choice", question="How do you say 'the airport'?", options=json.dumps(["✈️ el aeropuerto", "🏨 el hotel", "🚆 el tren", "🚌 el autobús"]), answer="✈️ el aeropuerto"),
-        models.Exercise(lesson_id=l7.id, type="translate", question="Where is the hotel?", options=json.dumps(["¿Dónde", "está", "el", "hotel", "aeropuerto", "?", "tren"]), answer="¿Dónde está el hotel?"),
-        models.Exercise(lesson_id=l7.id, type="fill_blank", question="El ___ llega a las diez.", options=json.dumps(["tren", "manzana", "perro", "agua"]), answer="tren")
+        models.Exercise(lesson_id=l7.id, type="multiple_choice", question="How do you say 'the airport'?", options=["✈️ el aeropuerto", "🏨 el hotel", "🚆 el tren", "🚌 el autobús"]), answer="✈️ el aeropuerto"),
+        models.Exercise(lesson_id=l7.id, type="translate", question="Where is the hotel?", options=["¿Dónde", "está", "el", "hotel", "aeropuerto", "?", "tren"]), answer="¿Dónde está el hotel?"),
+        models.Exercise(lesson_id=l7.id, type="fill_blank", question="El ___ llega a las diez.", options=["tren", "manzana", "perro", "agua"]), answer="tren")
     ]
 
     restaurant_exercises = [
-        models.Exercise(lesson_id=l8.id, type="multiple_choice", question="How do you say 'the menu'?", options=json.dumps(["📋 el menú", "🧾 la cuenta", "🤵 el mesero", "🍽️ la mesa"]), answer="📋 el menú"),
-        models.Exercise(lesson_id=l8.id, type="translate", question="I would like the chicken please.", options=json.dumps(["Quisiera", "el", "pollo", "por", "favor", "la", "carne", "gracias"]), answer="Quisiera el pollo por favor"),
-        models.Exercise(lesson_id=l8.id, type="type_answer", question="Type the Spanish word for 'water' (used at a restaurant)", options=json.dumps([]), answer="agua")
+        models.Exercise(lesson_id=l8.id, type="multiple_choice", question="How do you say 'the menu'?", options=["📋 el menú", "🧾 la cuenta", "🤵 el mesero", "🍽️ la mesa"]), answer="📋 el menú"),
+        models.Exercise(lesson_id=l8.id, type="translate", question="I would like the chicken please.", options=["Quisiera", "el", "pollo", "por", "favor", "la", "carne", "gracias"]), answer="Quisiera el pollo por favor"),
+        models.Exercise(lesson_id=l8.id, type="type_answer", question="Type the Spanish word for 'water' (used at a restaurant)", options=[]), answer="agua")
     ]
 
     all_exercises = intro_exercises + greet_exercises + animal_exercises + food_exercises + number_exercises + color_exercises + travel_exercises + restaurant_exercises
