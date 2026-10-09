@@ -69,11 +69,11 @@ export default async function HomePage() {
                 {/* Unit Header Banner (Matches screenshot: Green banner with Section 1 Unit 1 + GUIDEBOOK button) */}
                 <div className="rounded-2xl p-4 sm:p-5 text-white font-extrabold mb-10 flex items-center justify-between bg-[#58cc02] shadow-[0_4px_0_#46a302]">
                   <div>
-                    <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider opacity-90 mb-1">
+                    <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-white/90 mb-1">
                       <span>&larr;</span>
                       <span>SECTION {unit.order || uIdx + 1}, UNIT 1</span>
                     </div>
-                    <h2 className="text-xl sm:text-2xl font-black tracking-tight">
+                    <h2 className="text-2xl sm:text-[28px] font-black tracking-tight text-white leading-tight">
                       {unit.description || 'Order at a café'}
                     </h2>
                   </div>
@@ -81,7 +81,7 @@ export default async function HomePage() {
                   {/* GUIDEBOOK pill button */}
                   <Link
                     href={`/lesson/${skills[0]?.id || 1}`}
-                    className="flex items-center gap-2 bg-transparent hover:bg-black/10 border-2 border-white/60 text-white px-3.5 py-2 rounded-2xl font-black text-xs uppercase tracking-wider transition-all"
+                    className="flex items-center gap-2.5 bg-transparent hover:bg-black/10 active:translate-y-0.5 border-2 border-white/40 text-white px-4 py-2.5 rounded-2xl font-black text-xs sm:text-sm uppercase tracking-wider transition-all"
                   >
                     <BookOpen className="w-4 h-4" />
                     <span>GUIDEBOOK</span>
@@ -115,13 +115,13 @@ export default async function HomePage() {
                           <div className="absolute -top-9 left-1/2 -translate-x-1/2 w-2 h-9 bg-gray-200 dark:bg-[#202f36] rounded-full" />
                         )}
 
-                        {/* Floating "START" speech bubble for the active node */}
+                        {/* Floating "START" speech bubble for the active node (Authentic dark tooltip with bright green text) */}
                         {isFirstActive && (
-                          <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 start-bounce pointer-events-none">
-                            <div className="relative bg-white dark:bg-[#202f36] border-2 border-gray-200 dark:border-[#2b3940] text-gray-800 dark:text-white px-3.5 py-1 rounded-xl text-xs font-black uppercase tracking-wider shadow-md whitespace-nowrap">
+                          <div className="absolute -top-11 left-1/2 -translate-x-1/2 z-30 start-bounce pointer-events-none">
+                            <div className="relative bg-[#202f36] border-2 border-[#2b3940] text-[#58cc02] px-4 py-1.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider shadow-lg whitespace-nowrap">
                               START
-                              {/* Speech bubble down arrow */}
-                              <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-white dark:bg-[#202f36] border-b-2 border-r-2 border-gray-200 dark:border-[#2b3940] rotate-45" />
+                              {/* Speech bubble down arrow pointing to the node */}
+                              <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#202f36] border-b-2 border-r-2 border-[#2b3940] rotate-45" />
                             </div>
                           </div>
                         )}
@@ -156,13 +156,17 @@ export default async function HomePage() {
                     );
                   })}
 
-                  {/* Treasure Chest Node at the bottom */}
+                  {/* Treasure Chest Node at the bottom (Matches screenshot: slate chest with keyhole) */}
                   <div
-                    className="relative flex flex-col items-center z-10 opacity-70"
+                    className="relative flex flex-col items-center z-10"
                     style={{ transform: 'translateX(0px)' }}
                   >
-                    <div className="w-16 h-14 bg-gray-200 dark:bg-[#202f36] border-2 border-b-4 border-gray-300 dark:border-[#2b3940] rounded-2xl flex items-center justify-center text-2xl shadow-sm">
-                      🧰
+                    <div className="w-16 h-14 bg-[#202f36] border-2 border-b-[5px] border-[#2b3940] rounded-2xl flex items-center justify-center shadow-md">
+                      <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#4b5e68] fill-[#37464f]" stroke="currentColor" strokeWidth="1.5">
+                        <path d="M4 8h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z" />
+                        <path d="M2 5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3H2V5z" fill="#43535d" />
+                        <circle cx="12" cy="13" r="1.5" fill="#202f36" />
+                      </svg>
                     </div>
                   </div>
                 </div>
@@ -171,74 +175,73 @@ export default async function HomePage() {
           })}
         </div>
 
-        {/* Right-Side Column Widgets (Matches screenshot layout) */}
+        {/* Right-Side Column Widgets (Matches screenshot layout & authentic styling) */}
         <aside className="hidden xl:flex flex-col w-84 py-6 pl-8 gap-5 shrink-0">
           {/* Widget 1: Unlock Leaderboards! (Matches screenshot) */}
-          <div className="border-2 border-gray-200 dark:border-[#2b3940] rounded-2xl p-4 bg-white dark:bg-[#182228]">
-            <h3 className="font-black text-gray-800 dark:text-white text-base mb-3">
+          <div className="border-2 border-[#2b3940] rounded-2xl p-4 bg-[#182228]">
+            <h3 className="font-black text-white text-base mb-3">
               Unlock Leaderboards!
             </h3>
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-14 bg-gray-100 dark:bg-[#202f36] rounded-xl flex items-center justify-center text-2xl border border-gray-200 dark:border-[#2b3940] shrink-0">
-                <Shield className="w-6 h-6 text-gray-400 dark:text-gray-500" />
+              <div className="w-12 h-14 bg-[#202f36] rounded-xl flex items-center justify-center border border-[#2b3940] shrink-0">
+                <Shield className="w-6 h-6 text-[#52656d]" />
               </div>
-              <p className="text-xs font-bold text-gray-500 dark:text-gray-400 leading-snug">
-                Complete 2 more lessons to start competing in leagues!
+              <p className="text-sm font-bold text-[#839299] leading-snug">
+                Complete 2 more lessons to start competing
               </p>
             </div>
           </div>
 
           {/* Widget 2: Daily Quests (Matches screenshot: Earn 10 XP with lightning & golden progress bar) */}
-          <div className="border-2 border-gray-200 dark:border-[#2b3940] rounded-2xl p-4 bg-white dark:bg-[#182228]">
+          <div className="border-2 border-[#2b3940] rounded-2xl p-4 bg-[#182228]">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-black text-gray-800 dark:text-white text-base">
+              <h3 className="font-black text-white text-base">
                 Daily Quests
               </h3>
-              <Link href="/profile" className="text-xs font-extrabold text-[#1cb0f6] uppercase tracking-wider hover:underline">
+              <Link href="/profile" className="text-xs font-black text-[#1cb0f6] uppercase tracking-wider hover:underline">
                 VIEW ALL
               </Link>
             </div>
 
             <div className="flex items-center gap-3">
               {/* Lightning Bolt Icon */}
-              <div className="w-10 h-10 rounded-xl bg-amber-400/20 flex items-center justify-center text-amber-500 shrink-0">
-                <Zap className="w-6 h-6 fill-amber-500" />
+              <div className="w-10 h-10 rounded-xl bg-amber-400/20 flex items-center justify-center text-[#ffc800] shrink-0">
+                <Zap className="w-6 h-6 fill-[#ffc800]" />
               </div>
 
               <div className="flex-1">
-                <p className="text-xs font-extrabold text-gray-700 dark:text-gray-200 mb-1.5">
+                <p className="text-sm font-black text-white mb-1.5">
                   Earn 10 XP
                 </p>
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 h-3.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <div className="flex-1 h-4 bg-[#202f36] rounded-full overflow-hidden p-0.5 border border-[#2b3940]">
                     <div
-                      className="h-full bg-gradient-to-r from-amber-400 to-[#ffc800] rounded-full transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-[#ffd900] to-[#ffc800] rounded-full flex items-center justify-center transition-all duration-500"
                       style={{ width: `${Math.min(100, Math.round(((user.daily_xp || 10) / 10) * 100))}%` }}
-                    />
+                    >
+                      <span className="text-[10px] font-black text-[#6a4700]">10 / 10</span>
+                    </div>
                   </div>
-                  <span className="text-[10px] font-black text-amber-600 dark:text-amber-400">
-                    {user.daily_xp || 10}/10
-                  </span>
-                  <Gift className="w-4 h-4 text-amber-500 shrink-0" />
+                  <Gift className="w-5 h-5 text-[#a57134] fill-[#a57134]/30 shrink-0" />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Widget 3: Create a profile to save progress (Matches screenshot buttons) */}
-          <div className="border-2 border-gray-200 dark:border-[#2b3940] rounded-2xl p-4 bg-white dark:bg-[#182228] flex flex-col gap-3">
-            <h3 className="font-black text-gray-800 dark:text-white text-sm">
+          {/* Widget 3: Create a profile to save your progress! (Matches screenshot buttons) */}
+          <div className="border-2 border-[#2b3940] rounded-2xl p-4 bg-[#182228] flex flex-col gap-3">
+            <h3 className="font-black text-white text-base leading-snug">
               Create a profile to save your progress!
             </h3>
             <Link
               href="/profile"
-              className="w-full text-center bg-[#58cc02] text-white font-black py-3 rounded-2xl text-xs uppercase tracking-wider shadow-[0_4px_0_#46a302] active:translate-y-0.5 active:shadow-none transition-all hover:brightness-105"
+              className="w-full text-center bg-[#58cc02] text-white font-black py-3.5 rounded-2xl text-xs sm:text-sm uppercase tracking-wider shadow-[0_4px_0_#46a302] active:translate-y-1 active:shadow-none transition-all hover:brightness-105"
             >
               CREATE A PROFILE
             </Link>
             <Link
               href="/profile"
-              className="w-full text-center bg-[#1cb0f6] text-white font-black py-3 rounded-2xl text-xs uppercase tracking-wider shadow-[0_4px_0_#0a8fc5] active:translate-y-0.5 active:shadow-none transition-all hover:brightness-105"
+              className="w-full text-center bg-[#1cb0f6] text-white font-black py-3.5 rounded-2xl text-xs sm:text-sm tracking-wider uppercase shadow-[0_4px_0_#1899d6] active:translate-y-1 active:shadow-none transition-all hover:brightness-105"
             >
               SIGN IN
             </Link>
@@ -248,7 +251,7 @@ export default async function HomePage() {
           <TestSimulateWidget currentStreak={user.streak ?? 1} />
 
           {/* Footer Links (Matches screenshot bottom text) */}
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] font-bold text-gray-400 uppercase tracking-wider pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] font-black text-[#52656d] uppercase tracking-widest pt-2">
             <span>ABOUT</span>
             <span>&bull;</span>
             <span>BLOG</span>
@@ -280,8 +283,8 @@ function SkillNode({
 }) {
   if (locked) {
     return (
-      <div className="relative w-20 h-20 rounded-full flex items-center justify-center bg-gray-200 dark:bg-[#202f36] border-b-[6px] border-gray-300 dark:border-[#18252b] shadow-[0_4px_0_#141f24] transition-all">
-        <Star className="w-8 h-8 text-gray-400 dark:text-gray-600 fill-gray-400 dark:fill-gray-600" />
+      <div className="relative w-20 h-20 rounded-full flex items-center justify-center bg-[#202f36] border-b-[6px] border-[#18252b] shadow-[0_4px_0_#141f24] transition-all">
+        <Star className="w-8 h-8 text-[#37464f] fill-[#37464f]" />
       </div>
     );
   }
@@ -296,10 +299,10 @@ function SkillNode({
 
   // Active Node with Progress Ring (Matches screenshot: bright green with outer track ring)
   return (
-    <div className="relative flex items-center justify-center w-22 h-22">
+    <div className="relative flex items-center justify-center w-24 h-24">
       {/* Outer circular progress track */}
-      <div className="absolute inset-0 rounded-full border-4 border-gray-200 dark:border-[#202f36]" />
-      <div className="absolute inset-0 rounded-full border-4 border-[#58cc02] border-t-transparent -rotate-45" />
+      <div className="absolute inset-0 rounded-full border-[5px] border-[#202f36]" />
+      <div className="absolute inset-0 rounded-full border-[5px] border-[#58cc02] border-t-transparent border-l-transparent -rotate-45" />
 
       {/* Center green button */}
       <div className="w-18 h-18 rounded-full flex items-center justify-center bg-[#58cc02] border-b-[6px] border-[#46a302] shadow-[0_6px_0_#378000] active:translate-y-1 active:shadow-none transition-all cursor-pointer">

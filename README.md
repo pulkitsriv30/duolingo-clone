@@ -164,3 +164,56 @@ npm install
 npm run dev
 ```
 Runs at `http://localhost:3000`.
+
+---
+
+## Deployment Guide
+
+### 1. Push Code to GitHub
+
+```bash
+# In the root repository folder
+git add .
+git commit -m "Complete Duolingo clone with gamification, lesson player, and 3D mascot"
+git branch -M main
+git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPO_NAME>.git
+git push -u origin main
+```
+
+### 2. Deploy Backend (Render / Railway)
+
+#### Option A: Render (Free Tier)
+1. Go to [render.com](https://render.com) and log in with GitHub.
+2. Click **New +** -> **Web Service**.
+3. Select your repository.
+4. Configure:
+   - **Name**: `duolingo-clone-backend`
+   - **Root Directory**: `backend`
+   - **Environment**: `Python 3`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+5. Click **Deploy Web Service**.
+6. Once deployed, copy your backend URL: e.g. `https://duolingo-clone-backend.onrender.com`.
+
+#### Option B: Railway
+1. Go to [railway.app](https://railway.app) and click **New Project** -> **Deploy from GitHub repo**.
+2. Set Root Directory to `/backend`.
+3. Railway automatically detects `requirements.txt` and `Procfile`.
+4. Generate domain under Settings and copy the URL.
+
+---
+
+### 3. Deploy Frontend (Vercel)
+
+1. Go to [vercel.com](https://vercel.com) and log in with GitHub.
+2. Click **Add New...** -> **Project**.
+3. Import your GitHub repository.
+4. In Project Settings:
+   - **Framework Preset**: `Next.js`
+   - **Root Directory**: Click Edit and select `frontend`
+   - **Environment Variables**:
+     - Key: `NEXT_PUBLIC_API_URL`
+     - Value: `https://your-backend-url.onrender.com` (your deployed backend URL from Step 2)
+5. Click **Deploy**.
+6. In ~1 minute, your live site will be ready at `https://your-duolingo-app.vercel.app`!
+

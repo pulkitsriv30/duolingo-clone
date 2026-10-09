@@ -13,7 +13,21 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Duolingo Clone API")
 
-# Allow the Next.js frontend (any origin for local dev)
+# Auto-seed database if empty (ensures cloud deployment works out-of-the-box)
+@app.on_event("startup")
+def auto_seed_if_empty():
+    from database import SessionLocal
+    db = SessionLocal()
+    try:
+        if db.query(models.Unit).count() == 0:
+            import seed
+            seed.seed_db()
+    except Exception as e:
+        print(f"Startup seed notice: {e}")
+    finally:
+        db.close()
+
+# Allow the Next.js frontend (any origin for local dev and cloud)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
