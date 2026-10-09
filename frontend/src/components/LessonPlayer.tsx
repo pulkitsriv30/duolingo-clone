@@ -317,9 +317,29 @@ export default function LessonPlayer({
         )}
 
         {/* Question Heading (No voice readout of question, only selected option is read) */}
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 dark:text-white mb-8 leading-snug">
-          {current.question}
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 dark:text-white mb-6 leading-snug">
+          {current.question.split('||')[0]}
         </h2>
+
+        {/* Character Speech Bubble for translation exercises */}
+        {current.question.includes('||') && (
+          <div className="flex items-center gap-5 mb-8">
+            <div className="text-6xl drop-shadow-md">👩🏾‍🦱</div>
+            <div className="relative bg-transparent border-2 border-gray-200 dark:border-gray-700 rounded-2xl px-5 py-4 flex items-center gap-4">
+              <div className="absolute top-1/2 -left-[9px] -translate-y-1/2 w-4 h-4 bg-white dark:bg-[#131f24] border-b-2 border-l-2 border-gray-200 dark:border-gray-700 rotate-45" />
+              <button 
+                onClick={() => {
+                  import('@/lib/audio').then(m => m.playSound('click'));
+                  import('@/lib/audio').then(m => m.speakText(current.question.split('||')[1]));
+                }} 
+                className="text-[#1cb0f6] hover:text-[#0a8fc5] active:scale-95 transition-all"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+              </button>
+              <span className="text-xl font-medium text-gray-700 dark:text-gray-200 decoration-gray-300 decoration-2 underline-offset-4 decoration-dashed underline cursor-pointer">{current.question.split('||')[1]}</span>
+            </div>
+          </div>
+        )}
 
         {/* Render the appropriate exercise component */}
         {current.type === 'multiple_choice' && (
